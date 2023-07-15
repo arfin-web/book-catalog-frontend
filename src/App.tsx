@@ -1,9 +1,10 @@
 import './App.css'
+import Layout from './layout/Layout'
 
 function App() {
   return (
     <>
-      <h1>Arfin</h1>
+      <Layout />
     </>
   )
 }
