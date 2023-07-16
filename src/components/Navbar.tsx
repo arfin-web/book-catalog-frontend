@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom"
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
+    const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
+
+    if (isLoading) {
+        return <div>Loading ...</div>;
+    }
     return (
         <>
             <div className="navbar bg-base-100">
@@ -26,9 +32,37 @@ const Navbar = () => {
                         <li><NavLink to="/contact" className="text-lg">Contact</NavLink></li>
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <a href="/login" className="btn btn-active btn-primary text-neutral-content font-extrabold">Login Now</a>
-                </div>
+                {
+                    isAuthenticated ? <>
+                        <div className="dropdown dropdown-end">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img src={user?.picture} />
+                                </div>
+                            </label>
+                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                <li>
+                                    <a className="justify-between">
+                                        Profile
+                                        <span className="badge">New</span>
+                                    </a>
+                                </li>
+                                <li><a>{user?.name}</a></li>
+                                <li><a>{user?.email}</a></li>
+                                <li>
+                                    <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                                        Log Out
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </>
+                        : <>
+                            <div className="navbar-end">
+                                <button onClick={() => loginWithRedirect()} className="btn btn-active btn-primary text-neutral-content font-extrabold">Login Now</button>
+                            </div>
+                        </>
+                }
             </div>
         </>
     )

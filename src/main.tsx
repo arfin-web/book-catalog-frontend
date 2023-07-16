@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
@@ -11,6 +10,7 @@ import Books from './pages/Books.tsx';
 import Wishlist from './pages/Wishlist.tsx';
 import Contact from './pages/Contact.tsx';
 
+import { Auth0Provider } from '@auth0/auth0-react';
 import { Provider } from 'react-redux';
 import store from './redux/store.ts';
 import BookDetails from './pages/BookDetails.tsx';
@@ -45,9 +45,15 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <Auth0Provider
+    domain="dev-jr003cks0qsytkp1.us.auth0.com"
+    clientId="cbPFx1RPcZtX9M9ZnK1l7pFHI6i9BIxx"
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  >
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </React.StrictMode>,
+  </Auth0Provider>,
 )
