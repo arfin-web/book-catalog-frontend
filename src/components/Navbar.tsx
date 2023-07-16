@@ -15,7 +15,9 @@ const Navbar = () => {
                             <li><NavLink to="/contact" className="text-lg">Contact</NavLink></li>
                         </ul>
                     </div>
-                    <NavLink to="/" className="btn btn-ghost normal-case text-xl">daisyUI</NavLink>
+                    <NavLink to="/">
+                        <img className="w-16" src="https://cdn.sanity.io/images/ymxgha9c/production/8b472b6f2818a3dd0242a2434c363e44b6f00ea9-500x500.png?w=1080&q=75&fit=clip&auto=format" alt="logo" />
+                    </NavLink>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -25,7 +27,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn btn-active btn-primary text-neutral-content font-extrabold">Sign Up</a>
+                    <a href="/login" className="btn btn-active btn-primary text-neutral-content font-extrabold">Login Now</a>
                 </div>
             </div>
         </>

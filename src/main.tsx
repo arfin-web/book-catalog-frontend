@@ -13,6 +13,7 @@ import Contact from './pages/Contact.tsx';
 
 import { Provider } from 'react-redux';
 import store from './redux/store.ts';
+import BookDetails from './pages/BookDetails.tsx';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/books",
         element: <Books />,
+      },
+      {
+        path: "books/:id",
+        element: <BookDetails />
       },
       {
         path: "/wishlist",
