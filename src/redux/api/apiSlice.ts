@@ -22,7 +22,14 @@ export const api = createApi({
         getBookById: builder.query<Book, Book['_id']>({
             query: (id) => `/books/${id}`,
         }),
+        addBook: builder.mutation<Book, Partial<Book>>({
+            query: (book) => ({
+                url: '/books',
+                method: 'POST',
+                body: book,
+            }),
+        }),
     }),
 });
 
-export const { useGetBooksQuery, useGetBookByIdQuery } = api;
+export const { useGetBooksQuery, useGetBookByIdQuery, useAddBookMutation } = api;

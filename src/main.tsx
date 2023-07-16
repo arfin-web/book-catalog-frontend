@@ -14,6 +14,8 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { Provider } from 'react-redux';
 import store from './redux/store.ts';
 import BookDetails from './pages/BookDetails.tsx';
+import AddBook from './pages/AddBook.tsx';
+import ManageBook from './pages/ManageBook.tsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: "books/:id",
         element: <BookDetails />
+      },
+      {
+        path: "/addbook",
+        element: <AddBook />
+      },
+      {
+        path: "/managebook",
+        element: <ManageBook />
       },
       {
         path: "/wishlist",
