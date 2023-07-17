@@ -34,7 +34,7 @@ function BookDetails() {
                     </div>
                 </div>
             </div>
-            <p className='text-center text-lg font-semibold mt-4'>Reviews: {book.reviews.join(', ')}</p>
+            <p className='text-center text-lg font-semibold mt-4'>Reviews: {book.reviews?.join(', ')}</p>
         </div>
     );
 }

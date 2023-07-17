@@ -16,6 +16,7 @@ import store from './redux/store.ts';
 import BookDetails from './pages/BookDetails.tsx';
 import AddBook from './pages/AddBook.tsx';
 import ManageBook from './pages/ManageBook.tsx';
+import EditBook from './pages/EditBook.tsx';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         element: <Books />,
       },
       {
-        path: "books/:id",
+        path: "/books/:id",
         element: <BookDetails />
       },
       {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/managebook",
         element: <ManageBook />
+      },
+      {
+        path: "/book/:id",
+        element: <EditBook />
       },
       {
         path: "/wishlist",
