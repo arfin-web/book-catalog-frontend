@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import Loading from '../components/Loading';
 import { useGetBooksQuery, useDeleteBookMutation } from '../redux/api/apiSlice';
 import { Book } from '../types';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 function ManageBooks() {
     const { data: books, isLoading, isError } = useGetBooksQuery()
-    const [selectedBookId, setSelectedBookId] = useState('');
     const [deleteBook, { isLoading: isDeleting }] = useDeleteBookMutation();
+    const { user } = useAuth0();
+
 
     const handleDeleteBook = async (bookId: Book['_id']) => {
         const confirmed = window.confirm('Are you sure you want to delete this book?');
@@ -21,12 +23,14 @@ function ManageBooks() {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     if (isError) {
         return <div>Error occurred while fetching data</div>;
     }
+
+    const myBooks = books?.filter((book) => book.authorEmail === user?.email)
 
     return (
         <>
@@ -35,14 +39,14 @@ function ManageBooks() {
                     Manage <span className="text-primary">Books</span>
                 </h1>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
-                    {books?.map((book) => (
+                    {myBooks?.map((book) => (
                         <div className="card h-80 bg-neutral text-neutral-content" key={book._id}>
                             <div className="card-body items-center text-center">
                                 <h2 className="card-title">{book.title}</h2>
                                 <p>{book.author}</p>
                                 <p>{book.genre}</p>
                                 <p>{book.publicationDate}</p>
-                                <div className="card-actions flex flex-row justify-center mt-2">
+                                <div className="card-actions justify-center mt-2">
                                     <Link to={`/book/${book._id}`} className="btn btn-outline btn-primary">
                                         Edit
                                     </Link>

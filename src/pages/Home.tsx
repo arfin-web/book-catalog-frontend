@@ -1,3 +1,4 @@
+import Loading from '../components/Loading';
 import { useGetBooksQuery } from '../redux/api/apiSlice';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -5,7 +6,7 @@ const Home = () => {
     const { data: books, isLoading, isError } = useGetBooksQuery();
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     if (isError) {
@@ -16,7 +17,9 @@ const Home = () => {
         return <div>No books found</div>;
     }
 
-    const top10Books = books.slice(0, 10);
+    const sortedBooks = [...books].sort((a, b) => new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime());
+
+    const top10Books = sortedBooks.slice(0, 10);
 
     return (
         <>

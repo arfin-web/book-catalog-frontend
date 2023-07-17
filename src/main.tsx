@@ -8,7 +8,6 @@ import {
 import Home from './pages/Home.tsx';
 import Books from './pages/Books.tsx';
 import Wishlist from './pages/Wishlist.tsx';
-import Contact from './pages/Contact.tsx';
 
 import { Auth0Provider } from '@auth0/auth0-react';
 import { Provider } from 'react-redux';
@@ -50,10 +49,6 @@ const router = createBrowserRouter([
       {
         path: "/wishlist",
         element: <Wishlist />
-      },
-      {
-        path: "/contact",
-        element: <Contact />
       }
     ]
   },

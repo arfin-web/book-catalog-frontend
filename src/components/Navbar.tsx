@@ -17,10 +17,12 @@ const Navbar = () => {
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                             <li><NavLink to="/books" className="text-lg">Books</NavLink></li>
-
-                            <li><NavLink to="/addbook" className="text-lg">Add Book</NavLink></li>
-                            <li><NavLink to="/managebook" className="text-lg">Manage Book</NavLink></li>
-
+                            {
+                                isAuthenticated && <>
+                                    <li><NavLink to="/addbook" className="text-lg">Add Book</NavLink></li>
+                                    <li><NavLink to="/managebook" className="text-lg">Manage Book</NavLink></li>
+                                </>
+                            }
                             <li><NavLink to="/wishlist" className="text-lg">Wishlist</NavLink></li>
                         </ul>
                     </div>
@@ -31,10 +33,12 @@ const Navbar = () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li><NavLink to="/books" className="text-lg">Books</NavLink></li>
-
-                        <li><NavLink to="/addbook" className="text-lg">Add Book</NavLink></li>
-                        <li><NavLink to="/managebook" className="text-lg">Manage Book</NavLink></li>
-
+                        {
+                            isAuthenticated && <>
+                                <li><NavLink to="/addbook" className="text-lg">Add Book</NavLink></li>
+                                <li><NavLink to="/managebook" className="text-lg">Manage Book</NavLink></li>
+                            </>
+                        }
                         <li><NavLink to="/wishlist" className="text-lg">Wishlist</NavLink></li>
                     </ul>
                 </div>

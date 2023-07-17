@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useGetBooksQuery } from '../redux/api/apiSlice';
 import { Link } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 function Books() {
     const { data: books, isLoading, isError } = useGetBooksQuery();
@@ -9,7 +10,7 @@ function Books() {
     const [selectedYear, setSelectedYear] = useState('');
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     if (isError) {
