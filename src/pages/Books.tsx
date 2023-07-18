@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useGetBooksQuery } from '../redux/api/apiSlice';
+import { useAppDispatch } from '../redux/hooks';
+import { addBook } from '../redux/features/wishlistSlice';
 import { Link } from 'react-router-dom';
 import Loading from '../components/Loading';
+import { Book } from '../types';
 
 function Books() {
     const { data: books, isLoading, isError } = useGetBooksQuery();
@@ -43,6 +46,11 @@ function Books() {
 
     const years = Array.from(new Set(books?.map((book) => book.publicationDate.substring(0, 4)))).sort();
 
+    const dispatch = useAppDispatch();
+
+    const handleAddToWishlist = (book: Book) => {
+        dispatch(addBook(book));
+    };
     return (
         <>
             <div className='container mx-auto p-4'>
@@ -96,7 +104,9 @@ function Books() {
                                     <p>{book.genre}</p>
                                     <p>{book.publicationDate}</p>
                                     <div className="card-actions flex flex-row justify-center mt-2">
-                                        <button className="btn btn-primary">Add To Wishlist</button>
+                                        <button className="btn btn-primary" onClick={() => handleAddToWishlist(book)}>
+                                            Add To Wishlist
+                                        </button>
                                         <Link to={`/books/${book._id}`} className="btn btn-outline btn-primary">
                                             More Details
                                         </Link>

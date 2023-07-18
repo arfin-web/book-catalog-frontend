@@ -1,6 +1,9 @@
 import Loading from '../components/Loading';
 import { useGetBooksQuery } from '../redux/api/apiSlice';
+import { useAppDispatch } from '../redux/hooks';
+import { addBook } from '../redux/features/wishlistSlice';
 import { Link, NavLink } from 'react-router-dom';
+import { Book } from '../types';
 
 const Home = () => {
     const { data: books, isLoading, isError } = useGetBooksQuery();
@@ -21,6 +24,11 @@ const Home = () => {
 
     const top10Books = sortedBooks.slice(0, 10);
 
+    const dispatch = useAppDispatch();
+
+    const handleAddToWishlist = (book: Book) => {
+        dispatch(addBook(book));
+    };
     return (
         <>
             <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://img.freepik.com/free-psd/decorative-objects-old-books-vases-black-wall-japanese-style_176382-57.jpg?w=1060&t=st=1689420685~exp=1689421285~hmac=e5c3650dc708a107151f3b1afa59efb8bdbae76165e26bbed7541398da4e655b)' }}>
@@ -46,7 +54,9 @@ const Home = () => {
                                     <p>{book.genre}</p>
                                     <p>{book.publicationDate}</p>
                                     <div className="card-actions flex flex-row justify-center mt-2">
-                                        <button className="btn btn-primary">Add To Wishlist</button>
+                                        <button className="btn btn-primary" onClick={() => handleAddToWishlist(book)}>
+                                            Add To Wishlist
+                                        </button>
                                         <Link to={`/books/${book._id}`} className="btn btn-outline btn-primary">
                                             More Details
                                         </Link>
